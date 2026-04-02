@@ -30,7 +30,7 @@ const USAGE_TEXT =
   "  --crawl-concurrency 4\n" +
   "  --locale en --region us\n" +
   "  --industry \"…\"\n" +
-  "  --gemini-model gemini-2.0-flash\n\n" +
+  "  --gemini-model gemini-2.5-flash\n\n" +
   "Env: GEMINI_API_KEY, SERPAPI_API_KEY (https://serpapi.com/)";
 
 export type CliConfigResult =

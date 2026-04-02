@@ -95,7 +95,7 @@ export async function suggestSeoWithGemini(
 ): Promise<SeoSuggestion> {
   const genAI = new GoogleGenerativeAI(options.apiKey);
   const model = genAI.getGenerativeModel({
-    model: options.model ?? "gemini-2.0-flash",
+    model: options.model ?? "gemini-2.5-flash",
     generationConfig: {
       maxOutputTokens: options.maxOutputTokens ?? 4096,
       temperature: 0.35,

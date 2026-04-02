@@ -162,7 +162,7 @@ npx site-seo-pipeline --sitemap https://example.com/sitemap.xml \
 | `--skip-serp` | off | Do not call SerpAPI |
 | `--skip-suggest` | off | Do not call Gemini |
 | `--max-serp-calls <n>` | `80` | Max SerpAPI requests for the **whole** run (each URL may use up to 2 when budget remains) |
-| `--gemini-model <id>` | `gemini-2.0-flash` | Override if your key doesn’t support the default (e.g. `gemini-1.5-flash`) |
+| `--gemini-model <id>` | `gemini-2.5-flash` | Override if your key doesn’t support the default (e.g. `gemini-1.5-flash`) |
 
 ### Environment variables (summary)
 
@@ -274,7 +274,7 @@ const suggestion = await suggestSeoWithGemini(
   { brandName: "Example", siteUrl },
   snapshot,
   research,
-  { apiKey: process.env.GEMINI_API_KEY!, model: "gemini-2.0-flash" }
+  { apiKey: process.env.GEMINI_API_KEY!, model: "gemini-2.5-flash" }
 );
 ```
 
