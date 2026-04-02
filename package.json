@@ -1,6 +1,6 @@
 {
   "name": "site-seo-pipeline",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sitemap-driven SEO pipeline: crawl pages, Google Suggest + SerpAPI SERP research, Gemini meta and below-the-fold suggestions",
   "type": "module",
   "main": "./dist/index.js",
@@ -44,6 +44,14 @@
     "gemini"
   ],
   "author": "Karan Tankshali",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karantankshali/site-seo-pipeline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/karantankshali/site-seo-pipeline/issues"
+  },
+  "homepage": "https://github.com/karantankshali/site-seo-pipeline#readme",
   "license": "MIT",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

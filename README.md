@@ -1,5 +1,37 @@
 # site-seo-pipeline
 
+<p align="center">
+  <a href="#installation">Installation</a> ·
+  <a href="#quick-start-cli">Quick Start</a> ·
+  <a href="#starting-workflows">Starting Workflows</a> ·
+  <a href="#api-reference">API Reference</a> ·
+  <a href="#configuration">Configuration</a> ·
+  <a href="#testing">Testing</a> ·
+  <a href="#contributing">Contributing</a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/site-seo-pipeline"><img src="https://img.shields.io/npm/v/site-seo-pipeline.svg" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/package/site-seo-pipeline"><img src="https://img.shields.io/npm/dm/site-seo-pipeline.svg" alt="NPM Downloads" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/npm/l/site-seo-pipeline.svg" alt="License" /></a>
+  <a href="https://github.com/karantankshali/site-seo-pipeline"><img src="https://img.shields.io/github/stars/karantankshali/site-seo-pipeline?style=flat&logo=github" alt="GitHub Stars" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/karantankshali/site-seo-pipeline/commits"><img src="https://img.shields.io/github/last-commit/karantankshali/site-seo-pipeline?style=flat&logo=github" alt="Last Commit" /></a>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white" alt="Node.js" /></a>
+  <img src="https://img.shields.io/badge/ESM-modules-FFCA28?logo=javascript&logoColor=black" alt="ESM" />
+</p>
+
+<p align="center">
+  <a href="https://bundlephobia.com/package/site-seo-pipeline"><img src="https://img.shields.io/bundlephobia/minzip/site-seo-pipeline?label=bundle%20size" alt="Bundle Size" /></a>
+  <a href="https://github.com/karantankshali/site-seo-pipeline/issues"><img src="https://img.shields.io/github/issues/karantankshali/site-seo-pipeline?style=flat&logo=github" alt="Issues" /></a>
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" />
+</p>
+
+<!-- If your GitHub repo path differs, update the `karantankshali/site-seo-pipeline` segments in the badge URLs above. -->
+
 Turn your **sitemap** into **SEO recommendations** for each page: crawl the HTML, pull **keyword and SERP context**, then generate **meta title**, **meta description**, and **below-the-fold copy** (plus optional FAQs) with **Google Gemini**.
 
 Runs on **Node.js 18+** (ESM). Works on macOS, Linux, and Windows.
@@ -36,20 +68,22 @@ You can **skip paid steps** (`--skip-serp`, `--skip-suggest`) and still get craw
 
 ---
 
-## Quick start (CLI)
-
-**1.** Install:
+## Installation
 
 ```bash
 npm install site-seo-pipeline
 ```
 
-**2.** Get keys (optional but recommended for full output):
+---
+
+## Quick start (CLI)
+
+**1.** Get keys (optional but recommended for full output):
 
 - [Google AI Studio](https://aistudio.google.com/apikey) → `GEMINI_API_KEY`
 - [SerpAPI](https://serpapi.com/) → `SERPAPI_API_KEY`
 
-**3.** Run:
+**2.** Run:
 
 ```bash
 export GEMINI_API_KEY="your-key"
@@ -63,7 +97,7 @@ npx site-seo-pipeline \
   --out ./seo-output.json
 ```
 
-**4.** Open `seo-output.json`. Each entry has:
+**3.** Open `seo-output.json`. Each entry has:
 
 - `snapshot` — what the crawler saw on the page  
 - `research` — Suggest keywords + optional SERP snapshots  
@@ -71,6 +105,13 @@ npx site-seo-pipeline \
 - `errors` — per-page issues (e.g. crawl timeout, API error)  
 
 If you omit `GEMINI_API_KEY`, you’ll see a warning and **no `suggestion`** (everything else can still run). If you omit `SERPAPI_API_KEY`, **SERP snapshots are skipped** but Google Suggest still runs.
+
+---
+
+## Starting workflows
+
+- **CLI:** follow [Quick start (CLI)](#quick-start-cli) — `npx site-seo-pipeline` with `--sitemap`, `--site-url`, and `--brand` (plus keys for full output).
+- **Library:** call **`runPipeline`** from `site-seo-pipeline` with `seedSitemaps`, `site`, limits, and optional API keys — see [Use from your own code](#use-from-your-own-code).
 
 ---
 
@@ -134,6 +175,25 @@ npx site-seo-pipeline --sitemap https://example.com/sitemap.xml \
 | `MAX_SERP_CALLS` | Default for `--max-serp-calls` |
 
 The CLI loads a `.env` file from the **current working directory** when you run the binary.
+
+---
+
+## API reference
+
+- **CLI:** all flags and env fallbacks are listed in [CLI reference](#cli-reference) below.
+- **Programmatic:** import from `site-seo-pipeline` — see [Use from your own code](#use-from-your-own-code) for `runPipeline` and composed steps. Source exports live in [`src/index.ts`](https://github.com/karantankshali/site-seo-pipeline/blob/main/src/index.ts) (published build: `dist/`).
+
+---
+
+## Configuration
+
+Use **CLI flags** and **environment variables** together (flags win when both are set). The CLI reads a **`.env`** file in the current working directory.
+
+| Area | Where it’s documented |
+|------|------------------------|
+| Site / brand / locale | [Site / copy context](#site--copy-context) |
+| Concurrency, limits, skips | [Run control](#run-control) |
+| Env var names | [Environment variables (summary)](#environment-variables-summary) |
 
 ---
 
@@ -285,6 +345,15 @@ Each array element is roughly:
 
 ---
 
+## Testing
+
+```bash
+npm test
+npm run test:coverage
+```
+
+---
+
 ## Development
 
 ```bash
@@ -293,8 +362,13 @@ cd site-seo-pipeline
 npm install
 npm run build
 npm test
-npm run test:coverage
 ```
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the PR checklist and publish notes.
 
 ---
 
