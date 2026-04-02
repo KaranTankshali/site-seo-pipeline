@@ -1,14 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const generateContent = vi.fn();
-
-vi.mock("@google/generative-ai", () => ({
-  GoogleGenerativeAI: vi.fn().mockImplementation(() => ({
-    getGenerativeModel: vi.fn().mockReturnValue({
-      generateContent,
-    }),
-  })),
+const { generateContent } = vi.hoisted(() => ({
+  generateContent: vi.fn(),
 }));
+
+vi.mock("@google/generative-ai", () => {
+  class GoogleGenerativeAIMock {
+    getGenerativeModel() {
+      return { generateContent };
+    }
+  }
+  return { GoogleGenerativeAI: GoogleGenerativeAIMock };
+});
 
 import { suggestSeoWithGemini } from "../src/suggest/gemini.js";
 import type { PageResearchBundle, PageSnapshot, SiteProfile } from "../src/types.js";
