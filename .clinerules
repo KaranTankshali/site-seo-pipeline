@@ -1,0 +1,5 @@
+# site-seo-pipeline (Cline / similar)
+
+Read AGENTS.md in this directory for full project context, file map, and TypeScript/ESM conventions.
+
+Commands: npm run build, npm test. Public API: src/index.ts. Use .js extensions in src/ imports.
